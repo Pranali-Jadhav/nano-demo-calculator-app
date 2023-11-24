@@ -16,13 +16,17 @@ class MathController {
         return HttpResponse.ok("")
     }
 
-    @Post("/add", produces = [MediaType.APPLICATION_JSON])
-    fun add(): HttpResponse<String> {
-        return HttpResponse.ok("")
+    @Post("/add", produces = [MediaType.APPLICATION_JSON], consumes = [MediaType.APPLICATION_JSON])
+    fun add(@Valid numbers: Numbers): HttpResponse<Map<String, Int>> {
+        val result = numbers.first + numbers.second
+        val response = mapOf("result" to result)
+        return HttpResponse.ok(response)
     }
 
-    @Post("/subtract", produces = [MediaType.APPLICATION_JSON])
-    fun subtract(): HttpResponse<String> {
-        return HttpResponse.ok("")
+    @Post("/subtract", produces = [MediaType.APPLICATION_JSON], consumes = [MediaType.APPLICATION_JSON])
+    fun subtract(@Valid numbers: Numbers): HttpResponse<Map<String, Int>> {
+        val result = numbers.first - numbers.second
+        val response = mapOf("result" to result)
+        return HttpResponse.ok(response)
     }
 }
